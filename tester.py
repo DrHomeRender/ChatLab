@@ -35,16 +35,16 @@ def chat_with_bot():
         with torch.no_grad():
             output = model.generate(
                 input_ids,
-                attention_mask=attention_mask,  # 🔹 attention_mask 추가
-                max_length=50,  # 🔹 너무 짧게 잘리는 문제 해결 (기존 30 → 50)
+                attention_mask=attention_mask,  #  attention_mask 추가
+                max_length=50,  #  너무 짧게 잘리는 문제 해결 (기존 30 → 50)
                 num_return_sequences=1,  # 생성할 응답 개수
-                top_p=0.85,  # 🔹 nucleus sampling 범위 조정 (기존 0.8 → 0.85)
-                temperature=0.7,  # 🔹 조금 더 자연스러운 문장 생성 (기존 0.6 → 0.7)
-                repetition_penalty=1.8,  # 🔹 반복되는 문장 억제 (기존 1.7 → 1.8)
-                no_repeat_ngram_size=2,  # 🔹 2개 단어 이상의 n-그램 반복 방지
+                top_p=0.85,  #  nucleus sampling 범위 조정 (기존 0.8 → 0.85)
+                temperature=0.7,  #  조금 더 자연스러운 문장 생성 (기존 0.6 → 0.7)
+                repetition_penalty=1.8,  # 반복되는 문장 억제 (기존 1.7 → 1.8)
+                no_repeat_ngram_size=2,  # 2개 단어 이상의 n-그램 반복 방지
                 do_sample=True,  # 샘플링 적용
-                bad_words_ids=bad_words_ids,  # 🔹 불필요한 단어 차단
-                eos_token_id=tokenizer.eos_token_id  # 🔹 문장 완성을 유도
+                bad_words_ids=bad_words_ids,  #  불필요한 단어 차단
+                eos_token_id=tokenizer.eos_token_id  #  문장 완성을 유도
             )
 
         #  8. KoGPT2의 대답을 디코딩하여 출력
